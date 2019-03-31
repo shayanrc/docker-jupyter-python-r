@@ -33,8 +33,12 @@ RUN pip install matplotlib
 RUN pip install pillow
 RUN pip install requests
 RUN pip install h5py
-RUN pip install tensorflow==1.8.0
-RUN pip install keras==2.2.0
+RUN pip install tensorflow
+RUN pip install keras
+RUN pip install seaborn
+RUN pip install xgboost
+RUN pip install tqdm
+
 
 RUN conda install jupyter
 
@@ -49,14 +53,13 @@ RUN apt-get update && \
 # R
 RUN apt-get update
 RUN apt-get install -y r-base
-#RUN conda install -c r ipython-notebook r-irkernel
 RUN conda install -c r r-irkernel r-essentials -c conda-forge
 COPY packages.r /root/packages.r
 
 RUN ln -s /bin/tar /bin/gtar
 RUN Rscript /root/packages.r
 
-WORKDIR /root/
+WORKDIR /workspace
 
 EXPOSE 8888
 
